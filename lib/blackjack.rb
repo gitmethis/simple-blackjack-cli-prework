@@ -44,7 +44,7 @@ def initial_round
   display_card_total(sum)
   sum
 end
-
+@stayed = ''
 def hit?(card_total)
   # code hit? here
   
@@ -52,9 +52,10 @@ def hit?(card_total)
   user_input = get_user_input()
   
   if    user_input == 's'
-        
+        stayed = 'yes'
   elsif user_input == 'h'  
         card_total += deal_card()
+        
   else
         invalid_command()
   end
@@ -79,11 +80,14 @@ def runner
   welcome()
   
   #2
-  initial_round()
+  card_total = initial_round()
   
   #3
-  hit?()
+  while card_total < 21
+     card_total = hit?(card_total)
+     display_card_total(card_total)
+  end
   
-  
+  puts "Sorry, you hit #{card_total}. Thanks for playing!"
 end
     
